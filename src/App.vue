@@ -1,15 +1,14 @@
-<template>
-  <router-view/>
-  <button type="button" class="btn btn-primary">Primary</button>
-  <button type="button" class="btn btn-secondary">Secondary</button>
-  <button type="button" class="btn btn-success">Success</button>
-  <button type="button" class="btn btn-danger">Danger</button>
-  <button type="button" class="btn btn-warning">Warning</button>
-  <button type="button" class="btn btn-info">Info</button>
-  <button type="button" class="btn btn-light">Light</button>
-  <button type="button" class="btn btn-dark">Dark</button>
-
-  <button type="button" class="btn btn-link">Link</button>
+<template lang="pug">
+router-view
+button.btn.btn-primary(type='button') Primary
+button.btn.btn-secondary(type='button') Secondary
+button.btn.btn-success(type='button') Success
+button.btn.btn-danger(type='button') Danger
+button.btn.btn-warning(type='button') Warning
+button.btn.btn-info(type='button') Info
+button.btn.btn-light(type='button') Light
+button.btn.btn-dark(type='button') Dark
+button.btn.btn-link(type='button') Link
 </template>
 
 <style lang="scss">
