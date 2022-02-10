@@ -18,14 +18,19 @@ nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
       span.navbar-toggler-icon
 
     #navbarNav.collapse.navbar-collapse
-      ul.navbar-nav.fw-bold.ps-md-1
+
+      ul.navbar-nav.fw-bold.ps-md-1.d-flex.w-100
+
         li.nav-item.me-md-4.pe-md-2
           a.nav-link.text-lighter(href='#') 修練精神時光屋
+
         li.nav-item.dropdown
+
           a#navDropBtn.nav-link.text-lighter.dropdown-toggle(
             href='#'
             data-bs-toggle='dropdown'
             ) 薪資調查報告
+
           ul.dropdown-menu.dropdown-menu-dark.border-lighter.py-1.pe-1(
             arial-labelledby='navDropBtn')
             li.p-2
@@ -34,6 +39,10 @@ nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
               hr.dropdown-devider.m-0
             li.p-2
               a.dropdown-item.py-2 UI 薪資調查報告
+
+        li.nav-item.ms-md-auto
+          a.nav-link.text-primary(href='#') Login
+
 </template>
 
 <style lang="scss" scoped>
