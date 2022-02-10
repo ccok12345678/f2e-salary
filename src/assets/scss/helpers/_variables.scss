@@ -79,14 +79,16 @@ $dark:          $gray-900 !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
+  "primary":    #8E7DFA, // $primary,
+  "secondary":  #D2CBFD, // $secondary,
+  "success":    #32A23D, // $success,
+  "info":       #6B6783,// $info,
   "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
+  "danger":     #B42D2D, // $danger,
+  "light":      #CECCD6,
+  "lighter":    #F2F2F4,// $light,
+  "dark":       #28234C,
+  "darker":     #080231, // $dark
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -535,7 +537,7 @@ $border-radius-pill:          50rem !default;
 // scss-docs-end border-radius-variables
 
 // scss-docs-start box-shadow-variables
-$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow:                  0 .5rem 1rem rgba(142, 125, 250, .4);// 0 .5rem 1rem rgba($black, .15) !default;
 $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
 $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
 $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
@@ -649,7 +651,7 @@ $small-font-size:             .875em !default;
 
 $sub-sup-font-size:           .75em !default;
 
-$text-muted:                  $gray-600 !default;
+$text-muted:                  #9c9aad; // $gray-600 !default;
 
 $initialism-font-size:        $small-font-size !default;
 
