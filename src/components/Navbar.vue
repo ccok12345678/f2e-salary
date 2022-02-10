@@ -1,6 +1,6 @@
 <template lang="pug">
 nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
-  .container
+  .container-lg
 
     a.navbar-brand.me-md-5(href='#')
       h1.visually-hidden The F2E 3rd 前端薪資數據圖表調查
@@ -19,7 +19,7 @@ nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
 
     #navbarNav.collapse.navbar-collapse
 
-      ul.navbar-nav.fw-bold.ps-md-1.d-flex.w-100
+      ul.navbar-nav.fw-bold.pt-3.pt-md-0.ps-md-1.d-flex.w-100
 
         li.nav-item.me-md-4.pe-md-2
           a.nav-link.text-lighter(href='#') 修練精神時光屋
