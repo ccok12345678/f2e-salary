@@ -21,7 +21,27 @@ nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
       ul.navbar-nav.fw-bold.ps-md-1
         li.nav-item.me-md-4.pe-md-2
           a.nav-link.text-lighter(href='#') 修練精神時光屋
-        li.nav-item
-          a.nav-link.text-lighter(href='#') 薪資調查報告
-
+        li.nav-item.dropdown
+          a#navDropBtn.nav-link.text-lighter.dropdown-toggle(
+            href='#'
+            data-bs-toggle='dropdown'
+            ) 薪資調查報告
+          ul.dropdown-menu.dropdown-menu-dark.border-lighter.py-1.pe-1(
+            arial-labelledby='navDropBtn')
+            li.p-2
+              a.dropdown-item.py-2.pe-5.me-3 前端薪資調查報告
+            li
+              hr.dropdown-devider.m-0
+            li.p-2
+              a.dropdown-item.py-2 UI 薪資調查報告
 </template>
+
+<style lang="scss" scoped>
+.dropdown-devider {
+  border-top: 1px solid #28234C;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+</style>
