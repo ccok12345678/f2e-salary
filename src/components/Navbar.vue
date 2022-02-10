@@ -1,5 +1,5 @@
 <template lang="pug">
-nav.navbar.navbar-expand-md.navbar-light.bg-trasparent
+nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
   .container
 
     a.navbar-brand.me-md-5(href='#')
