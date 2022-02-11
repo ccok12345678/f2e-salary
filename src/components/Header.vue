@@ -7,15 +7,15 @@ head.container.d-flex.flex-column.align-items-center
 
     .col-12.col-sm-8.offset-md-2.col-md-6.offset-lg-4.col-lg-4
 
-      .p-2.border.border-lighter.rounded.d-flex.justify-content-around
+      .p-2.border.border-lighter.rounded.d-flex
 
-        button.fw-bold.btn.py-2.px-4.me-2(
+        button.fw-bold.btn.py-2.w-50.me-2(
           :class='{ "btn-switched": isBasic }'
           @click='isBasic = true'
         )
           | 基本資料
 
-        button.fw-bold.btn.py-2.px-4(
+        button.fw-bold.btn.py-2.w-50(
           :class='{ "btn-switched": !isBasic }'
           @click='isBasic = false'
         )
