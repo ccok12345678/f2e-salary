@@ -41,7 +41,7 @@ nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
               hr.dropdown-devider.m-0
             li.p-2
               router-link.dropdown-item.py-2(
-                to='/UI 薪資調查報告'
+                to='/designercharts'
               ) UI 薪資調查報告
 
         li.nav-item.ms-md-auto

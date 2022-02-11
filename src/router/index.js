@@ -17,6 +17,11 @@ const routes = [
         name: 'Engineer',
         component: () => import('../views/EngineerCharts.vue'),
       },
+      {
+        path: 'designercharts',
+        name: 'Designer',
+        component: () => import('../views/DesignerCharts.vue'),
+      },
     ],
   },
 
