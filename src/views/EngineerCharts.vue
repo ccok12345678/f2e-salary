@@ -1,3 +1,22 @@
 <template lang="pug">
-h2 Engineer
+Header(:heading='heading')
 </template>
+
+<script>
+import { ref } from 'vue';
+import Header from '../components/Header.vue';
+
+export default {
+  components: {
+    Header,
+  },
+
+  setup() {
+    const heading = ref('前端薪資調查報告');
+
+    return {
+      heading,
+    };
+  },
+};
+</script>
