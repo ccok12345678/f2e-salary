@@ -1,11 +1,20 @@
 <template lang="pug">
-h3 here can see charts
+.container-lg
+  .row
+
+    .con-md-6
+      ChartAreas
+    .con-md-6
 </template>
 
 <script>
 import { reactive } from 'vue';
+import ChartAreas from '@/components/Chart_Areas.vue';
 
 export default {
+  components: {
+    ChartAreas,
+  },
   props: {
     rawData: {
       type: Array,
