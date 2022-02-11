@@ -1,14 +1,17 @@
 <template lang="pug">
 Header(:heading='heading')
+Charts
 </template>
 
 <script>
 import { ref } from 'vue';
+import Charts from '@/views/Charts.vue';
 import Header from '../components/Header.vue';
 
 export default {
   components: {
     Header,
+    Charts,
   },
 
   setup() {
