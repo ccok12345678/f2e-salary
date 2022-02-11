@@ -6,6 +6,18 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    children: [
+      {
+        path: '/',
+        name: 'HomePage',
+        component: () => import('../views/EngineerCharts.vue'),
+      },
+      {
+        path: 'engineercharts',
+        name: 'Engineer',
+        component: () => import('../views/EngineerCharts.vue'),
+      },
+    ],
   },
 
 ];

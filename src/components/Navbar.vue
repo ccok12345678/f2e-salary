@@ -35,7 +35,7 @@ nav.navbar.navbar-expand-md.navbar-light.bg-trasparent.py-4
             arial-labelledby='navDropBtn')
             li.p-2
               router-link.dropdown-item.py-2.pe-5.me-3(
-                to='/前端薪資調查報告'
+                to='/engineercharts'
               ) 前端薪資調查報告
             li
               hr.dropdown-devider.m-0

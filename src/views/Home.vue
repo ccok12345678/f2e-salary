@@ -1,5 +1,8 @@
 <template lang="pug">
 Navbar
+
+router-view
+
 Footer
 </template>
 
