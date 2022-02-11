@@ -1,10 +1,10 @@
 <template lang="pug">
-.container-lg
+.container
   .row
 
-    .con-md-6
+    .col-md-6.bg-darker
       ChartAreas
-    .con-md-6
+    .col-md-6
 </template>
 
 <script>
