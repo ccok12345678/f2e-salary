@@ -1,12 +1,12 @@
 <template lang="pug">
 Header(:heading='heading')
-Charts
+Charts(:rawData='uiData')
 </template>
 
 <script>
 import { ref } from 'vue';
 import Charts from '@/views/Charts.vue';
-import Header from '../components/Header.vue';
+import Header from '@/components/Header.vue';
 
 export default {
   components: {
@@ -26,10 +26,11 @@ export default {
       return fetchData;
     }
 
-    console.log('ui', getData());
+    const uiData = getData();
 
     return {
       heading,
+      uiData,
     };
   },
 };

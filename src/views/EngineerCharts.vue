@@ -1,6 +1,6 @@
 <template lang="pug">
 Header(:heading='heading')
-Charts
+Charts(:rawData='feData')
 </template>
 
 <script>
@@ -26,10 +26,11 @@ export default {
       return fetchData;
     }
 
-    console.log('FE', getData());
+    const feData = getData();
 
     return {
       heading,
+      feData,
     };
   },
 };
