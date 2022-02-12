@@ -31,25 +31,31 @@ export default {
       : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
 
     const areas = ref([]);
+    const counts = ref([]);
+
     fetch(api)
       .then(async (fetchData) => {
         const rawData = await fetchData.json();
 
         rawData.forEach((people) => {
-          const area = people.company.area.replace('台灣 - ', '');
-
+          let area = people.company.area.replace('台灣 - ', '');
+          area = area.replace('(綠島、澎湖、金門、馬祖)', '');
           if (!areas.value.includes(area)) {
             areas.value.push(area);
+            counts.value[areas.value.indexOf(area)] = 1;
+          } else {
+            counts.value[areas.value.indexOf(area)] += 1;
           }
         });
       });
-    console.log('areas.value', areas.value);
+    console.log('areas', areas.value);
+    console.log('counts', counts.value);
 
     const chartData = {
       labels: areas.value,
       datasets: [{
         label: true,
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: counts.value,
       }],
     };
 
