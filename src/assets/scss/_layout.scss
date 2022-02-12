@@ -1,0 +1,22 @@
+// chart
+.chart {
+  background-color: $darker;
+  padding: $spacer * 2.5;
+}
+
+.chart-title {
+  padding-bottom: $spacer * 2.5;
+}
+
+.chart-body {
+  padding-top: $spacer * .5;
+}
+
+.chart-unit {
+  color: #6B6783;
+}
+
+.chart-content {
+  margin-top: $spacer * 1.375;
+  margin-left: 21px;
+}

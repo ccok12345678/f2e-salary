@@ -2,7 +2,7 @@
 .container
   .row
 
-    .col-md-6.bg-darker
+    .col-md-6
       ChartAreas
     .col-md-6
 </template>
