@@ -1,11 +1,13 @@
 // chart
 .chart {
   background-color: $darker;
-  padding: $spacer * 2.5;
+  padding: $spacer * 2.5 $spacer * 2.2;
+  border-radius: $spacer * .25;
 }
 
 .chart-title {
   padding-bottom: $spacer * 2.5;
+  font-weight: 700;
 }
 
 .chart-body {
@@ -18,5 +20,5 @@
 
 .chart-content {
   margin-top: $spacer * 1.375;
-  margin-left: 21px;
+  height: 310px;
 }

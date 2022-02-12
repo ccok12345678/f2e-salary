@@ -11,8 +11,8 @@ section.chart
     small.chart-unit
       | 單位：人
 
-    .chart-content
-      BarChart(:chartData='chartData' :options='options')
+    BarChart.chart-content(
+      :chartData='chartData' :options='options')
 
 </template>
 
@@ -25,6 +25,7 @@ export default {
   name: 'Home',
   components: { BarChart },
   setup() {
+    // get data
     const route = useRoute();
     const api = (route.name === 'Designer')
       ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
@@ -48,13 +49,11 @@ export default {
           }
         });
       });
-    console.log('areas', areas.value);
-    console.log('counts', counts.value);
 
+    // chart
     const chartData = {
       labels: areas.value,
       datasets: [{
-        label: true,
         data: counts.value,
       }],
     };
@@ -65,12 +64,17 @@ export default {
           grid: {
             display: false,
           },
+          ticks: {
+            autoSkip: false,
+            maxRotation: 0,
+          },
         },
         y: {
           grid: {
             drawTicks: true,
             color: '#6B6783',
             tickColor: '#080231',
+            tickLength: 24,
           },
           min: 0,
           max: 350,
