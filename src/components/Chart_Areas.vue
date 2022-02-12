@@ -17,33 +17,36 @@ section.chart
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { BarChart } from 'vue-chart-3';
 
 export default {
   name: 'Home',
   components: { BarChart },
-  props: {
-    rawData: {
-      type: Array,
-      default() { return []; },
-    },
-  },
-  setup(props) {
-    const rawData = reactive(props.rawData);
+  setup() {
+    const route = useRoute();
+    const api = (route.name === 'Designer')
+      ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
+      : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
 
-    console.log('rawData', rawData);
+    const areas = ref([]);
+    fetch(api)
+      .then(async (fetchData) => {
+        const rawData = await fetchData.json();
+
+        rawData.forEach((people) => {
+          const area = people.company.area.replace('台灣 - ', '');
+
+          if (!areas.value.includes(area)) {
+            areas.value.push(area);
+          }
+        });
+      });
+    console.log('areas.value', areas.value);
 
     const chartData = {
-      labels: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-      ],
+      labels: areas.value,
       datasets: [{
         label: true,
         data: [65, 59, 80, 81, 56, 55, 40],
