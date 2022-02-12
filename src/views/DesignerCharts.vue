@@ -16,6 +16,7 @@ export default {
 
   setup() {
     const heading = ref('UI 薪資調查報告');
+    const uiData = ref([]);
 
     // get api data
     async function getData() {
@@ -23,10 +24,12 @@ export default {
       const http = await fetch(api);
       const fetchData = await http.json();
 
-      return fetchData;
+      fetchData.forEach((item) => {
+        uiData.value.push(item);
+      });
     }
 
-    const uiData = getData();
+    getData();
 
     return {
       heading,

@@ -16,17 +16,19 @@ export default {
 
   setup() {
     const heading = ref('前端薪資調查報告');
+    const feData = ref([]);
 
     // get api data
     async function getData() {
       const api = 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
       const http = await fetch(api);
       const fetchData = await http.json();
-
-      return fetchData;
+      fetchData.forEach((item) => {
+        feData.value.push(item);
+      });
     }
 
-    const feData = getData();
+    getData();
 
     return {
       heading,
