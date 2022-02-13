@@ -54,6 +54,8 @@ export default {
     const chartData = {
       labels: areas.value,
       datasets: [{
+        maxBarThickness: 32,
+        minBarLength: 5,
         data: counts.value,
       }],
     };
