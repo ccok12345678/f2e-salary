@@ -68,7 +68,7 @@ export default {
           },
           ticks: {
             autoSkip: false,
-            maxRotation: 0,
+            // maxRotation: 0,
           },
         },
         y: {

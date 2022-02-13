@@ -9,7 +9,7 @@
       ChartAge
 
     .col-sm-5
-      ChartGender
+      ChartGender.h-100
 
     .col-sm-7
       ChartMajor

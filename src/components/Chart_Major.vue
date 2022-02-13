@@ -3,18 +3,19 @@ section.chart
 
   header.chart-header
 
-    h4.chart-title
-      | 地區
+    h4.chart-titl.mb-5.pb-1
+      | 科系與學歷
 
-  main.chart-body
-
-    small.chart-unit
-      | 單位：人
-
-    BarChart.chart-content(
+    BarChart.custom.chart-content(
       :chartData='chartData' :options='options')
 
 </template>
+
+<style lang="scss" scoped>
+.custom {
+  height: 244.5px;
+}
+</style>
 
 <script>
 import { ref } from 'vue';
@@ -93,11 +94,20 @@ export default {
       ],
     };
 
-    console.log(chartData.datasets[0]);
-
     const options = {
       indexAxis: 'y',
       responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            padding: 40,
+            color: '#6B6783',
+            boxWidth: 16,
+          },
+        },
+      },
       scales: {
         y: {
           stacked: true,

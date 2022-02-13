@@ -22,7 +22,7 @@ import {
   // TimeSeriesScale,
   // Decimation,
   // Filler,
-  // Legend,
+  Legend,
   // Title,
   Tooltip,
   // SubTitle,
@@ -54,15 +54,17 @@ Chart.register(
   // TimeSeriesScale,
   // Decimation,
   // Filler,
-  // Legend,
+  Legend,
   // Title,
   Tooltip,
   // SubTitle,
 );
 
 Chart.defaults.color = '#F2F2F4';
+Chart.defaults.font.size = 16;
 Chart.defaults.borderColor = '#6B6783';
 Chart.defaults.elements.bar.backgroundColor = '#8E7DFA';
+Chart.defaults.plugins.legend.display = false;
 
 const app = createApp(App);
 
