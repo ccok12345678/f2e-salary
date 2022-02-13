@@ -4,7 +4,7 @@ section.chart
   header.chart-header
 
     h4.chart-title
-      | 地區
+      | 年齡
 
   main.chart-body
 
@@ -31,7 +31,7 @@ export default {
       ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
       : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
 
-    const areas = ref([]);
+    const ages = ref([]);
     const counts = ref([]);
 
     fetch(api)
@@ -39,20 +39,19 @@ export default {
         const rawData = await fetchData.json();
 
         rawData.forEach((people) => {
-          let area = people.company.area.replace('台灣 - ', '');
-          area = area.replace('(綠島、澎湖、金門、馬祖)', '');
-          if (!areas.value.includes(area)) {
-            areas.value.push(area);
-            counts.value[areas.value.indexOf(area)] = 1;
+          const { age } = people;
+          if (!ages.value.includes(age)) {
+            ages.value.push(age);
+            counts.value[ages.value.indexOf(age)] = 1;
           } else {
-            counts.value[areas.value.indexOf(area)] += 1;
+            counts.value[ages.value.indexOf(age)] += 1;
           }
         });
       });
 
     // chart
     const chartData = {
-      labels: areas.value,
+      labels: ages.value,
       datasets: [{
         maxBarThickness: 32,
         minBarLength: 5,
@@ -68,7 +67,7 @@ export default {
           },
           ticks: {
             autoSkip: false,
-            // maxRotation: 0,
+            maxRotation: 0,
           },
         },
         y: {
@@ -79,7 +78,7 @@ export default {
             tickLength: 24,
           },
           min: 0,
-          max: 350,
+          max: 250,
           ticks: {
             stepSize: 50,
           },

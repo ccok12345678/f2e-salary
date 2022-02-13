@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 
 import {
   Chart,
-  // ArcElement,
+  ArcElement,
   LineElement,
   BarElement,
   // PointElement,
@@ -10,7 +10,7 @@ import {
   // BubbleController,
   // DoughnutController,
   LineController,
-  // PieController,
+  PieController,
   // PolarAreaController,
   // RadarController,
   // ScatterController,
@@ -22,10 +22,10 @@ import {
   // TimeSeriesScale,
   // Decimation,
   // Filler,
-  // Legend,
+  Legend,
   // Title,
   Tooltip,
-  SubTitle,
+  // SubTitle,
 } from 'chart.js';
 
 import App from './App.vue';
@@ -34,7 +34,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // chart.js
 Chart.register(
-  // ArcElement,
+  ArcElement,
   LineElement,
   BarElement,
   // PointElement,
@@ -42,7 +42,7 @@ Chart.register(
   // BubbleController,
   // DoughnutController,
   LineController,
-  // PieController,
+  PieController,
   // PolarAreaController,
   // RadarController,
   // ScatterController,
@@ -54,15 +54,17 @@ Chart.register(
   // TimeSeriesScale,
   // Decimation,
   // Filler,
-  // Legend,
+  Legend,
   // Title,
   Tooltip,
-  SubTitle,
+  // SubTitle,
 );
 
 Chart.defaults.color = '#F2F2F4';
+Chart.defaults.font.size = 16;
 Chart.defaults.borderColor = '#6B6783';
 Chart.defaults.elements.bar.backgroundColor = '#8E7DFA';
+Chart.defaults.plugins.legend.display = false;
 
 const app = createApp(App);
 
