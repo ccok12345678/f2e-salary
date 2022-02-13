@@ -41,16 +41,8 @@ export default {
     const doctorRex = new RegExp(degree.doctor);
     const masterRex = new RegExp(degree.master);
 
-    const majors = ref({
-      department: degree.department,
-      highDegree: 0,
-      normalDegree: 0,
-    });
-    const notMajors = ref({
-      department: '非相關科系',
-      highDegree: 0,
-      normalDegree: 0,
-    });
+    const dataOfNormal = ref([0, 0]);
+    const dataOfHigh = ref([0, 0]);
 
     fetch(api)
       .then(async (fetchData) => {
@@ -61,60 +53,47 @@ export default {
           switch (departmentRex.test(major)) {
             case true:
               if (doctorRex.test(education) || masterRex.test(education)) {
-                majors.value.highDegree += 1;
+                dataOfHigh.value[0] += 1;
               } else {
-                majors.value.normalDegree += 1;
+                dataOfNormal.value[0] += 1;
               }
               break;
 
             default:
               if (doctorRex.test(education) || masterRex.test(education)) {
-                notMajors.value.highDegree += 1;
+                dataOfHigh.value[1] += 1;
               } else {
-                notMajors.value.normalDegree += 1;
+                dataOfNormal.value[1] += 1;
               }
               break;
           }
         });
-        // console.log(majors.value);
-        // console.log('major: high', majors.value.highDegree);
-        // console.log('major: normal', majors.value.normalDegree);
-
-        // console.log(notMajors.value);
-        // console.log('notMajor: high', notMajors.value.highDegree);
-        // console.log('notMajor: normal', notMajors.value.normalDegree);
       });
 
     // chart
     const chartData = {
-      labels: [majors.value.department, notMajors.value.department],
+      labels: [degree.department, '非相關科系'],
       datasets: [
         {
           maxBarThickness: 32,
           minBarLength: 5,
-          stack: majors.value.department,
+          stack: degree.department,
           label: '大學（含）以下',
-          data: [
-            majors.value.normalDegree,
-            notMajors.value.normalDegree,
-          ],
+          data: dataOfNormal.value,
           backgroundColor: '#8E7DFA',
         },
         {
           maxBarThickness: 32,
           minBarLength: 5,
-          stack: majors.value.department,
+          stack: degree.department,
           label: '碩博士',
-          data: [
-            majors.value.highDegree,
-            notMajors.value.highDegree,
-          ],
+          data: dataOfHigh.value,
           backgroundColor: '#D2CBFD',
         },
       ],
     };
 
-    console.log(chartData);
+    console.log(chartData.datasets[0]);
 
     const options = {
       indexAxis: 'y',
@@ -135,7 +114,7 @@ export default {
             tickLength: 24,
           },
           min: 0,
-          max: 240,
+          max: 320,
           ticks: {
             stepSize: 40,
           },
