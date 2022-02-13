@@ -25,7 +25,7 @@ import {
   // Legend,
   // Title,
   Tooltip,
-  SubTitle,
+  // SubTitle,
 } from 'chart.js';
 
 import App from './App.vue';
@@ -57,7 +57,7 @@ Chart.register(
   // Legend,
   // Title,
   Tooltip,
-  SubTitle,
+  // SubTitle,
 );
 
 Chart.defaults.color = '#F2F2F4';
