@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 
 import {
   Chart,
-  // ArcElement,
+  ArcElement,
   LineElement,
   BarElement,
   // PointElement,
@@ -10,7 +10,7 @@ import {
   // BubbleController,
   // DoughnutController,
   LineController,
-  // PieController,
+  PieController,
   // PolarAreaController,
   // RadarController,
   // ScatterController,
@@ -34,7 +34,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // chart.js
 Chart.register(
-  // ArcElement,
+  ArcElement,
   LineElement,
   BarElement,
   // PointElement,
@@ -42,7 +42,7 @@ Chart.register(
   // BubbleController,
   // DoughnutController,
   LineController,
-  // PieController,
+  PieController,
   // PolarAreaController,
   // RadarController,
   // ScatterController,
