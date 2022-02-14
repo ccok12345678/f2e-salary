@@ -6,10 +6,35 @@ section.chart
     h4.chart-title.mb-5.pb-1
       | 第一份工作所採用之技術/軟體
 
-    BarChart.custom.chart-content(
-      :chartData='chartData' :options='options')
+    main.row
+      .col-md-6
+        BarChart.custom-skill.chart-content(
+          :chartData='chartData' :options='options')
+
+      .col-md-6.d-flex.justify-content-center.align-items-center
+        .chart-card.py-4.bg-dark.rounded
+
+          //- for engineer
+          .px-3.mx-3(v-if='$route.name !== "Designer"')
+            h6.fw-bold 後端語言
+            p.text-light.pb-4.mb-3 Node.js、Python、PHP、JAVA、Ruby
+            h6.fw-bold 任務指派工具
+            p.text-light.pb-4.mb-3 Trello、asana
+            h6.fw-bold UI 標示工具
+            p.text-light.mb-0 Adobe XD、Figma
+
+          //- for designer
+          .px-3.mx-3(v-else)
+            h6.fw-bold 應用軟體
+            p.text-light.pb-4.mb-3 Adobe XD、Photoshop、Illustrator、Figma
 
 </template>
+
+<style lang="scss" scoped>
+.custom-skill {
+  height: 288px;
+}
+</style>
 
 <style lang="scss" scoped>
 .custom {
