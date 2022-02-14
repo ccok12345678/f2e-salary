@@ -32,24 +32,38 @@ export default {
       ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
       : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
 
-    const skills = {
-      Git: 'Git',
-      backEnd: '後端語言',
-      taskTool: '任務指派工具',
-      UI: 'UI',
-    };
+    const engineerskills = [
+      'Git',
+      '後端語言',
+      '任務指派工具',
+      'UI',
+    ];
 
-    const gitRex = new RegExp(skills.Git);
-    const backEndRex = new RegExp(skills.backEnd);
-    const taskToolRex = new RegExp(skills.taskTool);
-    const UIRex = new RegExp(skills.UI);
+    const designerSkills = [
+      'HTML、CSS',
+      'jQuery',
+      'JavaScript',
+      '後端應用',
+    ];
 
-    const labels = [
+    const engineerLabels = [
       'Git 版本控制系統',
       '後端語言',
       '任務指派工具',
       'UI 標示工具',
     ];
+
+    const designerLabels = [
+      'HTML、CSS',
+      'jQuery',
+      'JavaScript',
+      '後端應用',
+    ];
+
+    const skills = (route.name === 'Designer') ? designerSkills : engineerskills;
+    const labels = (route.name === 'Designer') ? designerLabels : engineerLabels;
+
+    const skillsRex = skills.map((skill) => new RegExp(skill));
 
     const skillsData = ref([0, 0, 0, 0]);
     const dataNum = ref([0]);
@@ -63,25 +77,14 @@ export default {
 
           const { skill } = people.first_job;
 
-          if (gitRex.test(skill)) {
-            skillsData.value[0] += 1;
-          }
-
-          if (backEndRex.test(skill)) {
-            skillsData.value[1] += 1;
-          }
-
-          if (taskToolRex.test(skill)) {
-            skillsData.value[2] += 1;
-          }
-
-          if (UIRex.test(skill)) {
-            skillsData.value[3] += 1;
-          }
+          skillsRex.forEach((skillRex, index) => {
+            if (skillRex.test(skill)) {
+              skillsData.value[index] += 1;
+            }
+          });
         });
       });
 
-    console.log(dataNum.value);
     // chart
     const chartData = {
       labels,
@@ -97,7 +100,6 @@ export default {
 
     const options = {
       indexAxis: 'y',
-      responsive: true,
       scales: {
         y: {
           stacked: true,
