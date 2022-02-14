@@ -13,6 +13,10 @@
 
     .col-sm-7
       ChartMajor
+
+    .col-12
+      ChartSkills
+
 </template>
 
 <script>
@@ -20,6 +24,7 @@ import ChartAreas from '@/components/Chart_Areas.vue';
 import ChartAge from '@/components/Chart_Age.vue';
 import ChartGender from '@/components/Chart_Gender.vue';
 import ChartMajor from '@/components/Chart_Major.vue';
+import ChartSkills from '@/components/Chart_Skills.vue';
 
 export default {
   components: {
@@ -27,6 +32,7 @@ export default {
     ChartAge,
     ChartGender,
     ChartMajor,
+    ChartSkills,
   },
 };
 </script>
