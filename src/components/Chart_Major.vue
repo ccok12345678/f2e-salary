@@ -3,7 +3,7 @@ section.chart
 
   header.chart-header
 
-    h4.chart-titl.mb-5.pb-1
+    h4.chart-title.mb-5.pb-1
       | 科系與學歷
 
     BarChart.custom.chart-content(
