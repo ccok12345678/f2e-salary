@@ -11,7 +11,7 @@ section.chart
     small.chart-unit
       | 單位：人
 
-    BarChart.chart-content(
+    BarChart.chart-content.ps-3.ms-1(
       :chartData='chartData' :options='options')
 
 </template>
@@ -31,32 +31,35 @@ export default {
       ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
       : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
 
-    const areas = ref([]);
-    const counts = ref([]);
+    const labels = ['1年以下', '2-3年', '3-5年', '5-7年', '7-9年', '10年以上'];
+
+    const tenuresRex = labels.map((tenure) => new RegExp(tenure));
+
+    const tenureDatas = ref(labels.map(() => 0));
 
     fetch(api)
       .then(async (fetchData) => {
         const rawData = await fetchData.json();
 
         rawData.forEach((people) => {
-          let area = people.company.area.replace('台灣 - ', '');
-          area = area.replace('(綠島、澎湖、金門、馬祖)', '');
-          if (!areas.value.includes(area)) {
-            areas.value.push(area);
-            counts.value[areas.value.indexOf(area)] = 1;
-          } else {
-            counts.value[areas.value.indexOf(area)] += 1;
-          }
+          const jobTenure = people.company.job_tenure
+            .replace(' ', '')
+            .replace('~', '-');
+          tenuresRex.forEach((tenure, index) => {
+            if (tenure.test(jobTenure)) {
+              tenureDatas.value[index] += 1;
+            }
+          });
         });
       });
 
     // chart
     const chartData = {
-      labels: areas.value,
+      labels,
       datasets: [{
-        maxBarThickness: 32,
+        maxBarThickness: 48,
         minBarLength: 5,
-        data: counts.value,
+        data: tenureDatas.value,
       }],
     };
 
@@ -68,7 +71,6 @@ export default {
           },
           ticks: {
             autoSkip: false,
-            // maxRotation: 0,
           },
         },
         y: {
@@ -79,9 +81,9 @@ export default {
             tickLength: 24,
           },
           min: 0,
-          max: 350,
+          max: 175,
           ticks: {
-            stepSize: 50,
+            stepSize: 30,
           },
         },
       },
