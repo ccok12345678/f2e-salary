@@ -32,64 +32,65 @@ export default {
       ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
       : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
 
-    const degree = {
-      department: (route.name === 'Designer') ? '設計科系相關' : '資訊科系相關',
-      doctor: '博士',
-      master: '碩士',
+    const skills = {
+      Git: 'Git',
+      backEnd: '後端語言',
+      taskTool: '任務指派工具',
+      UI: 'UI',
     };
 
-    const departmentRex = new RegExp(degree.department);
-    const doctorRex = new RegExp(degree.doctor);
-    const masterRex = new RegExp(degree.master);
+    const gitRex = new RegExp(skills.Git);
+    const backEndRex = new RegExp(skills.backEnd);
+    const taskToolRex = new RegExp(skills.taskTool);
+    const UIRex = new RegExp(skills.UI);
 
-    const dataOfNormal = ref([0, 0]);
-    const dataOfHigh = ref([0, 0]);
+    const labels = [
+      'Git 版本控制系統',
+      '後端語言',
+      '任務指派工具',
+      'UI 標示工具',
+    ];
+
+    const skillsData = ref([0, 0, 0, 0]);
+    const dataNum = ref([0]);
 
     fetch(api)
       .then(async (fetchData) => {
         const rawData = await fetchData.json();
+
         rawData.forEach((people) => {
-          const { major, education } = people;
+          dataNum.value[0] += 1;
 
-          switch (departmentRex.test(major)) {
-            case true:
-              if (doctorRex.test(education) || masterRex.test(education)) {
-                dataOfHigh.value[0] += 1;
-              } else {
-                dataOfNormal.value[0] += 1;
-              }
-              break;
+          const { skill } = people.first_job;
 
-            default:
-              if (doctorRex.test(education) || masterRex.test(education)) {
-                dataOfHigh.value[1] += 1;
-              } else {
-                dataOfNormal.value[1] += 1;
-              }
-              break;
+          if (gitRex.test(skill)) {
+            skillsData.value[0] += 1;
+          }
+
+          if (backEndRex.test(skill)) {
+            skillsData.value[1] += 1;
+          }
+
+          if (taskToolRex.test(skill)) {
+            skillsData.value[2] += 1;
+          }
+
+          if (UIRex.test(skill)) {
+            skillsData.value[3] += 1;
           }
         });
       });
 
+    console.log(dataNum.value);
     // chart
     const chartData = {
-      labels: [degree.department, '非相關科系'],
+      labels,
       datasets: [
         {
           maxBarThickness: 32,
           minBarLength: 5,
-          stack: degree.department,
-          label: '大學（含）以下',
-          data: dataOfNormal.value,
+          data: skillsData.value,
           backgroundColor: '#8E7DFA',
-        },
-        {
-          maxBarThickness: 32,
-          minBarLength: 5,
-          stack: degree.department,
-          label: '碩博士',
-          data: dataOfHigh.value,
-          backgroundColor: '#D2CBFD',
         },
       ],
     };
@@ -97,17 +98,6 @@ export default {
     const options = {
       indexAxis: 'y',
       responsive: true,
-      plugins: {
-        legend: {
-          display: true,
-          position: 'bottom',
-          labels: {
-            padding: 40,
-            color: '#6B6783',
-            boxWidth: 16,
-          },
-        },
-      },
       scales: {
         y: {
           stacked: true,
@@ -124,9 +114,11 @@ export default {
             tickLength: 24,
           },
           min: 0,
-          max: 320,
+          max: dataNum.value,
           ticks: {
-            stepSize: 40,
+            // 以百分比呈現ticks
+            callback: (value) => `${((value / dataNum.value) * 100).toFixed(0)}%`,
+            stepSize: () => dataNum.value * 0.2,
           },
         },
       },
