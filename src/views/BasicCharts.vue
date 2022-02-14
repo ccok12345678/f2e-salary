@@ -1,20 +1,20 @@
 <template lang="pug">
-.container
+.container.pb-1
   .row.gy-4
 
-    .col-md-6
+    .col-md-6.pb-3
       ChartAreas
 
-    .col-md-6
+    .col-md-6.pb-3
       ChartAge
 
-    .col-sm-5
+    .col-sm-5.pb-3
       ChartGender.h-100
 
-    .col-sm-7
+    .col-sm-7.pb-3
       ChartMajor
 
-    .col-12
+    .col-12.pb-3
       ChartSkills
 
 </template>
