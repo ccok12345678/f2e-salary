@@ -33,27 +33,25 @@ section.chart
 
 <script>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
 import { PieChart } from 'vue-chart-3';
 
 export default {
-  name: 'Home',
   components: { PieChart },
-  setup() {
-    // get data
-    const route = useRoute();
-    const api = (route.name === 'Designer')
-      ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
-      : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
+  props: {
+    apiData: {
+      type: Array,
+      default() { return []; },
+    },
+  },
+  setup(props) {
+    const apiData = ref(props.apiData);
 
     const genders = ref([]);
     const counts = ref([]);
     const percentage = ref([]);
 
-    fetch(api)
-      .then(async (fetchData) => {
-        const rawData = await fetchData.json();
-
+    apiData.value
+      .then((rawData) => {
         rawData.forEach((people) => {
           const { gender } = people;
           if (!genders.value.includes(gender)) {

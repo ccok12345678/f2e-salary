@@ -18,26 +18,24 @@ section.chart
 
 <script>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
 import { BarChart } from 'vue-chart-3';
 
 export default {
-  name: 'Home',
   components: { BarChart },
-  setup() {
-    // get data
-    const route = useRoute();
-    const api = (route.name === 'Designer')
-      ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
-      : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
+  props: {
+    apiData: {
+      type: Array,
+      default() { return []; },
+    },
+  },
+  setup(props) {
+    const apiData = ref(props.apiData);
 
     const areas = ref([]);
     const counts = ref([]);
 
-    fetch(api)
-      .then(async (fetchData) => {
-        const rawData = await fetchData.json();
-
+    apiData.value
+      .then((rawData) => {
         rawData.forEach((people) => {
           let area = people.company.area.replace('台灣 - ', '');
           area = area.replace('(綠島、澎湖、金門、馬祖)', '');

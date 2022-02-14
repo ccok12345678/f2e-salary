@@ -18,18 +18,18 @@ section.chart
 
 <script>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
 import { BarChart } from 'vue-chart-3';
 
 export default {
-  name: 'Home',
   components: { BarChart },
-  setup() {
-    // get data
-    const route = useRoute();
-    const api = (route.name === 'Designer')
-      ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
-      : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
+  props: {
+    apiData: {
+      type: Array,
+      default() { return []; },
+    },
+  },
+  setup(props) {
+    const apiData = ref(props.apiData);
 
     const labels = ['1年以下', '2-3年', '3-5年', '5-7年', '7-9年', '10年以上'];
 
@@ -37,10 +37,8 @@ export default {
 
     const tenureDatas = ref(labels.map(() => 0));
 
-    fetch(api)
-      .then(async (fetchData) => {
-        const rawData = await fetchData.json();
-
+    apiData.value
+      .then((rawData) => {
         rawData.forEach((people) => {
           const jobTenure = people.company.job_tenure
             .replace(' ', '')
