@@ -12,8 +12,8 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import ChartJobTenure from '@/components/Chart_JobTenure.vue';
-import ChartSalary from '@/components/Chart_Salary.vue';
+import ChartJobTenure from '@/components/ChartJobTenure.vue';
+import ChartSalary from '@/components/ChartSalary.vue';
 
 export default {
   components: {

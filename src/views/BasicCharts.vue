@@ -23,11 +23,11 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import ChartAreas from '@/components/Chart_Areas.vue';
-import ChartAge from '@/components/Chart_Age.vue';
-import ChartGender from '@/components/Chart_Gender.vue';
-import ChartMajor from '@/components/Chart_Major.vue';
-import ChartSkills from '@/components/Chart_Skills.vue';
+import ChartAreas from '@/components/ChartAreas.vue';
+import ChartAge from '@/components/ChartAge.vue';
+import ChartGender from '@/components/ChartGender.vue';
+import ChartMajor from '@/components/ChartMajor.vue';
+import ChartSkills from '@/components/ChartSkills.vue';
 
 export default {
   components: {
