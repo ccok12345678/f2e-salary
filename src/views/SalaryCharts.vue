@@ -6,6 +6,10 @@
 
   ChartSalary(:apiData='rawData')
 
+  .w-100.py-4
+
+  ChartIndustry(:apiData='rawData')
+
 </template>
 
 <script>
@@ -14,11 +18,13 @@ import { useRoute } from 'vue-router';
 
 import ChartJobTenure from '@/components/ChartJobTenure.vue';
 import ChartSalary from '@/components/ChartSalary.vue';
+import ChartIndustry from '@/components/ChartIndustry.vue';
 
 export default {
   components: {
     ChartJobTenure,
     ChartSalary,
+    ChartIndustry,
   },
   setup() {
     async function getData() {
