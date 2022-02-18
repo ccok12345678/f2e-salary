@@ -26,7 +26,7 @@ export default {
   components: { BarChart },
   props: {
     apiData: {
-      type: Array,
+      type: Promise,
       default() { return []; },
     },
   },

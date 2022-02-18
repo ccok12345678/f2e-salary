@@ -48,7 +48,7 @@ export default {
   components: { PieChart },
   props: {
     apiData: {
-      type: Array,
+      type: Promise,
       default() { return []; },
     },
   },
