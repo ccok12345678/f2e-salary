@@ -11,13 +11,13 @@ head.container.d-flex.flex-column.align-items-center
 
         button.fw-bold.btn.py-2.w-50.me-2(
           :class='{ "btn-switched": isBasic }'
-          @click='isBasic = true'
+          @click='toggleBasic(true)'
         )
           | 基本資料
 
         button.fw-bold.btn.py-2.w-50(
           :class='{ "btn-switched": !isBasic }'
-          @click='isBasic = false'
+          @click='toggleBasic(false)'
         )
           | 薪資與產業
 
@@ -66,15 +66,20 @@ export default {
       default() { return ''; },
     },
   },
-  setup(props) {
-    // console.log('header', props);
+  setup(props, { emit }) {
     const Heading = ref(props.heading);
 
     const isBasic = ref(true);
 
+    function toggleBasic(isToggle) {
+      isBasic.value = isToggle;
+      emit('toggle-basic', isBasic);
+    }
+
     return {
       Heading,
       isBasic,
+      toggleBasic,
     };
   },
 };

@@ -1,21 +1,14 @@
 <template lang="pug">
 .container.pb-1
-  .row.gy-4
+  ChartJobTenure(:apiData='rawData')
 
-    .col-md-6.pb-3
-      ChartAreas(:apiData='rawData')
+  .w-100.py-4
 
-    .col-md-6.pb-3
-      ChartAge(:apiData='rawData')
+  ChartSalary(:apiData='rawData')
 
-    .col-sm-5.pb-3
-      ChartGender.h-100(:apiData='rawData')
+  .w-100.py-4
 
-    .col-sm-7.pb-3
-      ChartMajor(:apiData='rawData')
-
-    .col-12.pb-3
-      ChartSkills(:apiData='rawData')
+  ChartIndustry(:apiData='rawData')
 
 </template>
 
@@ -23,19 +16,15 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import ChartAreas from '@/components/ChartAreas.vue';
-import ChartAge from '@/components/ChartAge.vue';
-import ChartGender from '@/components/ChartGender.vue';
-import ChartMajor from '@/components/ChartMajor.vue';
-import ChartSkills from '@/components/ChartSkills.vue';
+import ChartJobTenure from '@/components/ChartJobTenure.vue';
+import ChartSalary from '@/components/ChartSalary.vue';
+import ChartIndustry from '@/components/ChartIndustry.vue';
 
 export default {
   components: {
-    ChartAreas,
-    ChartAge,
-    ChartGender,
-    ChartMajor,
-    ChartSkills,
+    ChartJobTenure,
+    ChartSalary,
+    ChartIndustry,
   },
   setup() {
     async function getData() {

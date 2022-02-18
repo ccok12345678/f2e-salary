@@ -3,7 +3,7 @@ section.chart
 
   header.chart-header
 
-    h4.chart-titl.mb-5.pb-1
+    h4.chart-title.mb-5.pb-1
       | 科系與學歷
 
     BarChart.custom.chart-content(
@@ -23,14 +23,16 @@ import { useRoute } from 'vue-router';
 import { BarChart } from 'vue-chart-3';
 
 export default {
-  name: 'Home',
   components: { BarChart },
-  setup() {
-    // get data
+  props: {
+    apiData: {
+      type: Promise,
+      default() { return []; },
+    },
+  },
+  setup(props) {
+    const apiData = ref(props.apiData);
     const route = useRoute();
-    const api = (route.name === 'Designer')
-      ? 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/ui_data.json'
-      : 'https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json';
 
     const degree = {
       department: (route.name === 'Designer') ? '設計科系相關' : '資訊科系相關',
@@ -45,9 +47,8 @@ export default {
     const dataOfNormal = ref([0, 0]);
     const dataOfHigh = ref([0, 0]);
 
-    fetch(api)
-      .then(async (fetchData) => {
-        const rawData = await fetchData.json();
+    apiData.value
+      .then((rawData) => {
         rawData.forEach((people) => {
           const { major, education } = people;
 
