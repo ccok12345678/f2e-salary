@@ -11,13 +11,13 @@ section.chart
     small.chart-unit
       | 單位：千元
 
-    canvas(ref='salaryChart')
+    canvas.chart-content.ps-3(ref='chart')
 
 </template>
 
 <script>
-import { reactive } from 'vue';
-// import { Chart } from 'chart.js';
+import { reactive, ref, onMounted } from 'vue';
+import { Chart } from 'chart.js';
 
 export default {
   props: {
@@ -27,18 +27,19 @@ export default {
     },
   },
   setup(props) {
-    const apiData = reactive(props.apiData);
-
     const labels = ['1年以下', '2-3年', '3-5年', '5-7年', '7-9年', '10年以上'];
 
     const tenureRex = labels.map((label) => new RegExp(label));
-
     const tenureCount = labels.map(() => 0);
     const salaryCount = labels.map(() => 0);
-    const counts = reactive([]);
 
-    apiData.then((data) => {
-      data.forEach((people) => {
+    const counts = reactive([]);
+    const chart = ref(null);
+
+    onMounted(async () => {
+      const res = await reactive(props.apiData);
+
+      res.forEach((people) => {
         const jobTenure = people.company.job_tenure
           .replace(' ', '')
           .replace('~', '-');
@@ -54,17 +55,65 @@ export default {
           }
         });
       });
-      console.log(labels);
-      console.log('年資', tenureCount);
-      console.log('薪資', salaryCount);
 
       salaryCount.forEach((salary, index) => {
         const average = Math.round((salary / tenureCount[index]) * 10);
         counts.push(average);
       });
+
+      // chart data & options
+      // eslint-disable-next-line no-unused-vars
+      const salaryChart = new Chart(chart.value, {
+        data: {
+          labels,
+          datasets: [
+            {
+              type: 'bar',
+              data: counts,
+              maxBarThickness: 48,
+              minBarLength: 5,
+              order: 2,
+            }, {
+              type: 'line',
+              data: counts,
+              borderColor: '#F9F8FE',
+              borderWidth: 2,
+              fill: true,
+              pointBackgroundColor: '#8E7DFA',
+              pointRadius: 10,
+              pointBorderWidth: 3,
+              order: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: '#6b6783',
+                tickColor: '#080231',
+                tickLength: 24,
+              },
+              min: 0,
+              max: 1200,
+              ticks: {
+                stepSize: 200,
+              },
+            },
+          },
+        },
+      });
     });
 
-    console.log(counts);
+    return {
+      chart,
+    };
   },
 };
 </script>
