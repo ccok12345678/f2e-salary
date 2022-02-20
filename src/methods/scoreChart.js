@@ -1,4 +1,5 @@
-export default function sortData(rawData, isMoreToLess) {
+/* eslint-disable no-param-reassign */
+function sortData(rawData, isMoreToLess) {
   const industries = [];
   const industryCount = [];
 
@@ -64,3 +65,59 @@ export default function sortData(rawData, isMoreToLess) {
 
   return industryCount;
 }
+
+function sectionData(data, newSection) {
+  const dataTotal = data.length;
+  const perSection = 8;
+  const sectionTotal = Math.ceil(dataTotal / perSection);
+
+  let currentSection = newSection;
+  if (currentSection > sectionTotal) {
+    currentSection = sectionTotal;
+  } else if (currentSection < 1) {
+    currentSection = 1;
+  }
+
+  // 該section第一筆資料
+  const minData = (currentSection * perSection) - perSection + 1;
+  // 該section最後一筆資料
+  const maxData = (currentSection * perSection);
+
+  const section = {
+    sectionTotal,
+    currentSection,
+    hasPre: currentSection > 1,
+    hasNext: currentSection < sectionTotal,
+    sectionNum: 0,
+    sectionData: [],
+  };
+
+  data.forEach((item, index) => {
+    const num = index + 1;
+    if (num >= minData && num <= maxData) {
+      section.sectionData.push(item);
+    }
+
+    if (num % perSection === 0) {
+      section.sectionNum += 1;
+    }
+  });
+
+  return section;
+}
+
+function updateScoreChart(chart, sectionedData) {
+  const labels = sectionedData.map((data) => data.category);
+  const salaryDatas = sectionedData.map((data) => data.salary);
+  const scoreDatas = sectionedData.map((data) => data.score);
+
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = salaryDatas;
+  chart.data.datasets[1].data = scoreDatas;
+
+  chart.update();
+}
+
+export {
+  sortData, sectionData, updateScoreChart,
+};

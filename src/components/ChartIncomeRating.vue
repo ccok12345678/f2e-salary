@@ -44,9 +44,9 @@ import {
   ref, onMounted, watch,
 } from 'vue';
 import { Chart } from 'chart.js';
-import sortSalaryScoreData from '@/methods/sortSalaryScoreData';
-import sectionData from '@/methods/sectionData';
-import updateScoreChart from '@/methods/updateScoreChart';
+import {
+  sortData, sectionData, updateScoreChart,
+} from '@/methods/scoreChart';
 
 export default {
   props: {
@@ -67,7 +67,7 @@ export default {
     onMounted(async () => {
       resData.value = await props.apiData;
 
-      const sortedData = sortSalaryScoreData(resData.value, isMoreToLess.value);
+      const sortedData = sortData(resData.value, isMoreToLess.value);
 
       sectionedData.value = sectionData(sortedData, nowSection.value);
 
@@ -140,7 +140,7 @@ export default {
     });
 
     watch(isMoreToLess, () => {
-      const sortedData = sortSalaryScoreData(resData.value, isMoreToLess.value);
+      const sortedData = sortData(resData.value, isMoreToLess.value);
 
       sectionedData.value = sectionData(sortedData, 1);
 
