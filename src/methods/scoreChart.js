@@ -1,4 +1,7 @@
 /* eslint-disable no-param-reassign */
+
+import { Chart } from 'chart.js';
+
 function sortData(rawData, isMoreToLess) {
   const industries = [];
   const industryCount = [];
@@ -106,6 +109,77 @@ function sectionData(data, newSection) {
   return section;
 }
 
+function addChart(chart, sectionedData) {
+  const labels = sectionedData.map((data) => data.category);
+  const salaryDatas = sectionedData.map((data) => data.salary);
+  const scoreDatas = sectionedData.map((data) => data.score);
+
+  const scoreChart = document.querySelector('#scoreChart');
+
+  chart = new Chart(scoreChart, {
+    data: {
+      labels,
+      datasets: [
+        {
+          type: 'bar',
+          data: salaryDatas,
+          maxBarThickness: 48,
+          minBarLength: 5,
+          order: 2,
+        }, {
+          type: 'line',
+          yAxisID: 'ratingScale',
+          data: scoreDatas,
+          borderColor: '#F9F8FE',
+          borderWidth: 2,
+          fill: true,
+          pointBackgroundColor: '#8E7DFA',
+          pointRadius: 10,
+          pointBorderWidth: 3,
+          order: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#6b6783',
+            tickColor: '#080231',
+            tickLength: 24,
+          },
+          min: 0,
+          max: 1200,
+          ticks: {
+            stepSize: 200,
+          },
+        },
+        ratingScale: {
+          position: 'right',
+          min: 0,
+          max: 10,
+          grid: {
+            display: false,
+            tickColor: '#080231',
+            tickLength: 24,
+          },
+          ticks: {
+            stepSize: 2,
+          },
+        },
+      },
+    },
+  });
+
+  return chart;
+}
+
 function updateScoreChart(chart, sectionedData) {
   const labels = sectionedData.map((data) => data.category);
   const salaryDatas = sectionedData.map((data) => data.salary);
@@ -119,5 +193,5 @@ function updateScoreChart(chart, sectionedData) {
 }
 
 export {
-  sortData, sectionData, updateScoreChart,
+  addChart, sortData, sectionData, updateScoreChart,
 };
