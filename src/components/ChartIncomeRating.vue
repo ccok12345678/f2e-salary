@@ -8,10 +8,14 @@ section.chart
 
     nav
 
-      button.btn.btn-outline-lighter.p-3.me-4
+      button.btn.btn-outline-lighter.p-3.me-4(
+        :disabled='!sectionedData.hasPre'
+        @click='currentSection -= 1')
         | ＜ 前8筆
 
-      button.btn.btn-outline-lighter.p-3.me-5
+      button.btn.btn-outline-lighter.p-3.me-5(
+        :disabled='!sectionedData.hasNext'
+        @click='currentSection += 1')
         | 後8筆 ＞
 
       .dropdown.d-inline
@@ -56,32 +60,39 @@ export default {
   },
   setup(props) {
     const resData = ref({});
-    const nowSection = ref(1);
-    const isMoreToLess = ref(true);
     const sectionedData = ref({});
+    const currentSection = ref(1);
+    const isMoreToLess = ref(true);
 
     let salaryChart;
 
+    // add chart
     onMounted(async () => {
       resData.value = await props.apiData;
-
       const sortedData = sortData(resData.value, isMoreToLess.value);
-
-      sectionedData.value = sectionData(sortedData, nowSection.value);
-
+      sectionedData.value = sectionData(sortedData, currentSection.value);
       salaryChart = addChart(salaryChart, sectionedData.value.sectionData);
     });
 
+    // change sort
     watch(isMoreToLess, () => {
       const sortedData = sortData(resData.value, isMoreToLess.value);
+      currentSection.value = 1;
+      sectionedData.value = sectionData(sortedData, currentSection.value);
+      updateScoreChart(salaryChart, sectionedData.value.sectionData);
+    });
 
-      sectionedData.value = sectionData(sortedData, 1);
-
+    // change section
+    watch(currentSection, () => {
+      const sortedData = sortData(resData.value, isMoreToLess.value);
+      sectionedData.value = sectionData(sortedData, currentSection.value);
       updateScoreChart(salaryChart, sectionedData.value.sectionData);
     });
 
     return {
       isMoreToLess,
+      currentSection,
+      sectionedData,
     };
   },
 };
