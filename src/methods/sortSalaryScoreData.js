@@ -62,10 +62,5 @@ export default function sortData(rawData, isMoreToLess) {
     }
   }
 
-  // return data
-  const labels = industryCount.map((industry) => industry.category);
-  const salaryDatas = industryCount.map((industry) => industry.salary);
-  const scoreDatas = industryCount.map((industry) => industry.score);
-
-  return { labels, salaryDatas, scoreDatas };
+  return industryCount;
 }

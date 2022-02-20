@@ -41,10 +41,11 @@ section.chart
 
 <script>
 import {
-  reactive, ref, onMounted, watch,
+  ref, onMounted, watch,
 } from 'vue';
 import { Chart } from 'chart.js';
 import sortSalaryScoreData from '@/methods/sortSalaryScoreData';
+import sectionData from '@/methods/sectionData';
 
 export default {
   props: {
@@ -55,17 +56,24 @@ export default {
   },
   setup(props) {
     const resData = ref({});
-    const chart = ref(null);
+    const nowSection = ref(1);
     const isMoreToLess = ref(true);
+    const chart = ref(null);
 
     let salaryChart;
 
     onMounted(async () => {
-      resData.value = await reactive(props.apiData);
+      resData.value = await props.apiData;
 
       const sortedData = sortSalaryScoreData(resData.value, isMoreToLess.value);
 
-      const { labels, salaryDatas, scoreDatas } = sortedData;
+      const sectionedData = sectionData(sortedData, nowSection.value);
+
+      console.log('section', sectionedData.sectionData);
+
+      const labels = sectionedData.sectionData.map((data) => data.category);
+      const salaryDatas = sectionedData.sectionData.map((data) => data.salary);
+      const scoreDatas = sectionedData.sectionData.map((data) => data.score);
 
       // chart data & options
       // eslint-disable-next-line no-unused-vars
@@ -134,9 +142,11 @@ export default {
     watch(isMoreToLess, () => {
       const sortedData = sortSalaryScoreData(resData.value, isMoreToLess.value);
 
-      console.log('resort', sortedData);
+      const sectionedData = sectionData(sortedData, 1);
 
-      const { labels, salaryDatas, scoreDatas } = sortedData;
+      const labels = sectionedData.sectionData.map((data) => data.category);
+      const salaryDatas = sectionedData.sectionData.map((data) => data.salary);
+      const scoreDatas = sectionedData.sectionData.map((data) => data.score);
 
       salaryChart.data.labels = labels;
       salaryChart.data.datasets[0].data = salaryDatas;
