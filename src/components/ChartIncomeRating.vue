@@ -46,6 +46,7 @@ import {
 import { Chart } from 'chart.js';
 import sortSalaryScoreData from '@/methods/sortSalaryScoreData';
 import sectionData from '@/methods/sectionData';
+import updateScoreChart from '@/methods/updateScoreChart';
 
 export default {
   props: {
@@ -58,6 +59,7 @@ export default {
     const resData = ref({});
     const nowSection = ref(1);
     const isMoreToLess = ref(true);
+    const sectionedData = ref({});
     const chart = ref(null);
 
     let salaryChart;
@@ -67,13 +69,11 @@ export default {
 
       const sortedData = sortSalaryScoreData(resData.value, isMoreToLess.value);
 
-      const sectionedData = sectionData(sortedData, nowSection.value);
+      sectionedData.value = sectionData(sortedData, nowSection.value);
 
-      console.log('section', sectionedData.sectionData);
-
-      const labels = sectionedData.sectionData.map((data) => data.category);
-      const salaryDatas = sectionedData.sectionData.map((data) => data.salary);
-      const scoreDatas = sectionedData.sectionData.map((data) => data.score);
+      const labels = sectionedData.value.sectionData.map((data) => data.category);
+      const salaryDatas = sectionedData.value.sectionData.map((data) => data.salary);
+      const scoreDatas = sectionedData.value.sectionData.map((data) => data.score);
 
       // chart data & options
       // eslint-disable-next-line no-unused-vars
@@ -142,16 +142,9 @@ export default {
     watch(isMoreToLess, () => {
       const sortedData = sortSalaryScoreData(resData.value, isMoreToLess.value);
 
-      const sectionedData = sectionData(sortedData, 1);
+      sectionedData.value = sectionData(sortedData, 1);
 
-      const labels = sectionedData.sectionData.map((data) => data.category);
-      const salaryDatas = sectionedData.sectionData.map((data) => data.salary);
-      const scoreDatas = sectionedData.sectionData.map((data) => data.score);
-
-      salaryChart.data.labels = labels;
-      salaryChart.data.datasets[0].data = salaryDatas;
-      salaryChart.data.datasets[1].data = scoreDatas;
-      salaryChart.update();
+      updateScoreChart(salaryChart, sectionedData.value.sectionData);
     });
 
     return {
