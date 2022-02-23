@@ -6,7 +6,7 @@ section.chart
     h4.chart-title.mb-5.pb-1
       | 第一份工作所採用之技術/軟體
 
-    main.row
+    main.row.gy-5
       .col-md-6
         BarChart.custom-skill.chart-content(
           :chartData='chartData' :options='options')

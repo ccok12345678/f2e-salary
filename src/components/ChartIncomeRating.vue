@@ -1,25 +1,25 @@
 <template lang="pug">
 section.chart
 
-  header.chart-header.d-flex
+  header.chart-header.d-flex.flex-column.flex-md-row
 
     h4.chart-title.me-auto
       | 產業薪資與滿意度
 
-    nav
+    nav.mb-4.mb-md-0
 
-      button.btn.btn-outline-lighter.p-3.me-4(
+      button.btn.btn-outline-lighter.p-2.p-md-3.me-3.me-md-4(
         :disabled='!sectionedData.hasPre'
         @click='currentSection -= 1')
         | ＜ 前8筆
 
-      button.btn.btn-outline-lighter.p-3.me-5(
+      button.btn.btn-outline-lighter.p-2.p-md-3.me-3.me-md-5(
         :disabled='!sectionedData.hasNext'
         @click='currentSection += 1')
         | 後8筆 ＞
 
       .dropdown.d-inline
-        button#orderDropdown.btn.btn-outline-lighter.dropdown-toggle.p-3(
+        button#orderDropdown.btn.btn-outline-lighter.dropdown-toggle.p-2.p-md-3(
           data-bs-toggle='dropdown')
           | 依人數
           span(v-if='isMoreToLess')  高到低
