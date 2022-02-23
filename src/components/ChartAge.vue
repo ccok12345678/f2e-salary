@@ -1,12 +1,12 @@
 <template lang="pug">
-section.chart
+section.chart.px-2.px-sm-4
 
   header.chart-header
 
     h4.chart-title
       | 年齡
 
-  main.chart-body
+  main.chart-body.px-sm-1
 
     small.chart-unit
       | 單位：人
@@ -37,7 +37,9 @@ export default {
     apiData.value
       .then((rawData) => {
         rawData.forEach((people) => {
-          const { age } = people;
+          const age = people.age
+            .replace('~', '-')
+            .replace(' ', '');
           if (!ages.value.includes(age)) {
             ages.value.push(age);
             counts.value[ages.value.indexOf(age)] = 1;

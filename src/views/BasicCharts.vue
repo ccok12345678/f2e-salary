@@ -2,16 +2,16 @@
 .container.pb-1
   .row.gy-4
 
-    .col-md-6.pb-3
+    .col-lg-6.pb-3
       ChartAreas(:apiData='rawData')
 
-    .col-md-6.pb-3
+    .col-lg-6.pb-3
       ChartAge(:apiData='rawData')
 
-    .col-sm-5.pb-3
+    .col-lg-5.pb-3
       ChartGender.h-100(:apiData='rawData')
 
-    .col-sm-7.pb-3
+    .col-lg-7.pb-3
       ChartMajor(:apiData='rawData')
 
     .col-12.pb-3

@@ -6,19 +6,19 @@ section.chart
     h4.chart-title
       | 產業分佈
 
-  main.row
+  main.row.gy-5
 
     .col-md-6
       .row.g-0.w-100
 
-        .col-4.d-flex.align-items-center.justify-content-end(
+        .col-4.d-flex.align-items-center.justify-content-lg-end.justify-content-center(
           v-if="percentage.length !== 0"
         )
           .fw-bold.d-flex.flex-column.align-items-center
             span {{ percentage[1].label }}
             span  {{ percentage[1].percentage }} %
 
-        PieChart.chart-content.col-4.offset-1(
+        PieChart.chart-content.col-4.offset-lg-1(
           :chartData='chartData')
 
         .col-2.offset-1.d-flex.align-items-center(

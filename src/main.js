@@ -61,10 +61,17 @@ Chart.register(
 );
 
 Chart.defaults.color = '#F2F2F4';
-Chart.defaults.font.size = 16;
 Chart.defaults.borderColor = '#6B6783';
 Chart.defaults.elements.bar.backgroundColor = '#8E7DFA';
 Chart.defaults.plugins.legend.display = false;
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 576) {
+    Chart.defaults.font.size = 16;
+  } else {
+    Chart.defaults.font.size = 12;
+  }
+});
 
 const app = createApp(App);
 

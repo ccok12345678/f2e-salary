@@ -34,16 +34,29 @@ export default {
     const areas = ref([]);
     const counts = ref([]);
 
+    const isTaiwan = new RegExp('台灣');
+
     apiData.value
       .then((rawData) => {
         rawData.forEach((people) => {
-          let area = people.company.area.replace('台灣 - ', '');
-          area = area.replace('(綠島、澎湖、金門、馬祖)', '');
-          if (!areas.value.includes(area)) {
-            areas.value.push(area);
-            counts.value[areas.value.indexOf(area)] = 1;
+          if (isTaiwan.test(people.company.area)) {
+            const area = people.company.area
+              .replace('台灣 - ', '')
+              .replace('(綠島、澎湖、金門、馬祖)', '');
+            if (!areas.value.includes(area)) {
+              areas.value.push(area);
+              counts.value[areas.value.indexOf(area)] = 1;
+            } else {
+              counts.value[areas.value.indexOf(area)] += 1;
+            }
           } else {
-            counts.value[areas.value.indexOf(area)] += 1;
+            const area = '國外';
+            if (!areas.value.includes(area)) {
+              areas.value.push(area);
+              counts.value[areas.value.indexOf(area)] = 1;
+            } else {
+              counts.value[areas.value.indexOf(area)] += 1;
+            }
           }
         });
       });
