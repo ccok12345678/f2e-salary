@@ -58,6 +58,7 @@ export default {
         maxBarThickness: 48,
         minBarLength: 5,
         data: tenureDatas.value,
+        label: '人',
       }],
     };
 
