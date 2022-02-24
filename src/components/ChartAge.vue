@@ -56,6 +56,7 @@ export default {
         maxBarThickness: 32,
         minBarLength: 5,
         data: counts.value,
+        label: '人',
       }],
     };
 
