@@ -119,6 +119,7 @@ export default {
           minBarLength: 5,
           data: skillsData.value,
           backgroundColor: '#8E7DFA',
+          label: '人',
         },
       ],
     };

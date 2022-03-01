@@ -73,9 +73,11 @@ export default {
               maxBarThickness: 48,
               minBarLength: 5,
               order: 2,
+              label: '千元',
             }, {
               type: 'line',
               data: counts,
+              label: '千元',
               borderColor: '#F9F8FE',
               borderWidth: 2,
               fill: true,

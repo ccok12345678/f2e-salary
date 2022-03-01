@@ -68,10 +68,18 @@ export default {
         maxBarThickness: 32,
         minBarLength: 5,
         data: counts.value,
+        label: '人',
       }],
     };
 
     const options = {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            // label: ({ dataset, dataIndex }) => `${dataset.data[dataIndex]} ${dataset.label}`,
+          },
+        },
+      },
       scales: {
         x: {
           grid: {

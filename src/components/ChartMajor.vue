@@ -6,8 +6,13 @@ section.chart
     h4.chart-title.mb-5.pb-1
       | 科系與學歷
 
-    BarChart.custom.chart-content(
-      :chartData='chartData' :options='options')
+    .row
+      BarChart.col-10.custom.chart-content(
+        :chartData='chartData' :options='options')
+
+      .col-2.d-flex
+        small.chart-unit.mt-auto.mb-5.pb-4
+          | 單位：人
 
 </template>
 
@@ -99,6 +104,14 @@ export default {
       indexAxis: 'y',
       responsive: true,
       plugins: {
+        tooltip: {
+          titleColor: '#CECCD6',
+          titleFont: { size: 12 },
+          callbacks: {
+            title: (context) => context[0].dataset.label,
+            label: ({ dataset, dataIndex }) => `${dataset.data[dataIndex]} 人`,
+          },
+        },
         legend: {
           display: true,
           position: 'bottom',
