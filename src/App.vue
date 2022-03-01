@@ -18,7 +18,7 @@ export default {
         { name: 'description', content: '六角學院所做之前端工程師、UI設計師薪資調查並以圖表呈現。為The F2E 3rd加開之活動關卡。' },
       ],
       link: [
-        { rel: 'favicon', href: 'favicon.ico' },
+        { rel: 'icon', href: 'favicon.ico' },
       ],
     });
   },
